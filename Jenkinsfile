@@ -1,20 +1,23 @@
 pipeline {
-  agent any
+  agent none
   stages {
     stage('checkout') {
       steps {
-        git(branch: 'master', url: 'git@github.com:saeidtech/jenkins.git')
+        git(branch: 'master', url: 'https://github.com/saeidtech/jenkins.git')
       }
     }
     stage('Build') {
       steps {
-        sh 'sh "mvn clean compile"'
+        sh 'mvn clean compile'
       }
     }
     stage('Test') {
       steps {
-        sh 'sh "mvn test"'
+        sh 'mvn test'
       }
     }
+  }
+  environment {
+    label = 'linux'
   }
 }
